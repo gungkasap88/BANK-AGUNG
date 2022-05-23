@@ -4,7 +4,7 @@
     <!-- Button Tambah Data  -->
     <div class="row mb-3">
         <div class="col-lg-6">
-            <a href="" class="btn btn-primary">Tambah Data Nasabah</a>
+            <a href="<?= base_url(); ?>nasabah/tambah" class="btn btn-primary">Tambah Data Nasabah</a>
         </div>
     </div>
 

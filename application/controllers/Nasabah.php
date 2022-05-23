@@ -20,4 +20,12 @@ class Nasabah extends CI_Controller {
         $this->load->view('nasabah/index.php', $data);
         $this->load->view('templates/footer.php');
     }
+
+    public function tambah()
+    {
+        $data['judul'] = 'Form Tambah Data Nasabah';
+        $this->load->view('templates/header.php', $data);
+        $this->load->view('nasabah/tambah.php',);
+        $this->load->view('templates/footer.php',);
+    }
 }
