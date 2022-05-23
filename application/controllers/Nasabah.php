@@ -10,6 +10,9 @@ class Nasabah extends CI_Controller {
         // $this->load->database();
         $this->load->model('Nasabah_model');                                                            //
         // Untuk memanggil database agar dapat dipakai disemua method di dalam class nasabah//
+        $this->load->library('form_validation');
+
+        // Menambahkan flashdata pada autoload, karna digunakan di setiap halaman
     }
 
     public function index()
@@ -24,8 +27,32 @@ class Nasabah extends CI_Controller {
     public function tambah()
     {
         $data['judul'] = 'Form Tambah Data Nasabah';
-        $this->load->view('templates/header.php', $data);
-        $this->load->view('nasabah/tambah.php',);
-        $this->load->view('templates/footer.php',);
+
+        // Ini untuk memvalidasi data, untuk menghindari data kosong
+        $this->form_validation->set_rules('ktp', 'KTP', 'required|numeric');
+        $this->form_validation->set_rules('nama', 'NAMA', 'required');
+        $this->form_validation->set_rules('alamat', 'ALAMAT', 'required');
+        $this->form_validation->set_rules('tempatlahir', 'TEMPAT LAHIR', 'required');
+        $this->form_validation->set_rules('tanggal', 'TANGGAL LAHIR', 'required');
+        $this->form_validation->set_rules('telp', 'NO TELP', 'required|numeric');
+        // helper(['nama', 'url']);
+        if( $this->form_validation->run() == FALSE ) {
+            $this->load->view('templates/header.php', $data);
+            $this->load->view('nasabah/tambah.php',);
+            $this->load->view('templates/footer.php',);
+        } else {
+            $this->Nasabah_model->tambahDataNasabah();
+            $this->session->set_flashdata('flash', 'Ditambahkan');
+            redirect('nasabah');
+        }   
     }
+
+    public function hapus($id)
+    {
+        $this->Nasabah_model->hapusDataNasabah($id);
+        $this->session->set_flashdata('flash', 'Dihapus');
+        redirect('nasabah');
+    }
+
+
 }
