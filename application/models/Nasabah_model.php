@@ -21,6 +21,8 @@ class Nasabah_model extends CI_model {
 
         $this->db->insert('nasabah', $data);
 
+        // Untuk data pada POSTMAN
+        return $this->db->affected_rows();
     }
 
 
@@ -31,6 +33,8 @@ class Nasabah_model extends CI_model {
 
         // Untuk mebuat code seperti diatas, tetapi lebih singkat
         // $this->db->delete('nasabah', ['id' => $id]);
+
+        // return $this->db->affected_rows();
     }
 
     public function getNasabahById($id)
@@ -52,6 +56,8 @@ class Nasabah_model extends CI_model {
         $this->db->where('id', $this->input->post('id'));
         $this->db->update('nasabah', $data);
 
+        // Untuk data pada POSTMAN
+        return $this->db->affected_rows();
     }
 
     public function cariDataNasabah()
@@ -71,6 +77,18 @@ class Nasabah_model extends CI_model {
             return $this->db->get_where('nasabah', ['id' => $id])->result_array();
         }
         
+    }
+
+    public function deleteNasabah($id)
+    {
+        $this->db->delete('nasabah', ['id' => $id]);
+        return $this->db->affected_rows();
+    }
+
+    public function updateNasabah($data, $id)
+    {
+        $this->db->update('nasabah', $data, ['id' => $id]);
+        return $this->db->affected_rows();
     }
 
 }
