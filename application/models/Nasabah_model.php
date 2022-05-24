@@ -63,5 +63,14 @@ class Nasabah_model extends CI_model {
         return $this->db->get('nasabah')->result_array();
     }
 
+    public function getNasabah($id = null)
+    {
+        if ( $id === null ) {
+            return $this->db->get('nasabah')->result_array();
+        } else {
+            return $this->db->get_where('nasabah', ['id' => $id])->result_array();
+        }
+        
+    }
 
 }
